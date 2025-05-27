@@ -28,8 +28,8 @@
                 <input type="text" name="ubicacion" class="form-control w-full border-gray-300 rounded focus:border-orange-500 focus:ring-orange-500" required placeholder="Dirección completa">
             </div>
             <div>
-                <label class="block text-gray-700 font-medium mb-1">Fecha</label>
-                <input type="date" name="fecha" class="form-control w-full border-gray-300 rounded focus:border-orange-500 focus:ring-orange-500" required>
+                <label class="block text-gray-700 font-medium mb-1">Fecha y Hora</label>
+                <input type="datetime-local" name="fecha" class="form-control w-full border-gray-300 rounded focus:border-orange-500 focus:ring-orange-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Cantidad de personas</label>

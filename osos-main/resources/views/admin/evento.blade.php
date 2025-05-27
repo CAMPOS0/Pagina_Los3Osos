@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label class="block text-gray-700 font-medium mb-1">Fecha</label>
-                    <input type="date" name="fecha" class="form-control w-full border-gray-300 rounded focus:border-orange-500 focus:ring-orange-500" value="{{ $eventoEdit->fecha ?? '' }}" required>
+                    <input type="datetime-local" name="fecha" class="form-control w-full border-gray-300 rounded focus:border-orange-500 focus:ring-orange-500" value="{{ isset($eventoEdit) ? $eventoEdit->fecha->format('Y-m-d\TH:i') : '' }}" required>
                 </div>
                 <div class="flex space-x-2">
                     <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition">{{ isset($eventoEdit) ? 'Actualizar' : 'Crear' }}</button>
@@ -63,7 +63,7 @@
                     <td class="px-4 py-2">{{ $evento->servicio->nombre }}</td>
                     <td class="px-4 py-2">${{ number_format($evento->precio_final, 2) }}</td>
                     <td class="px-4 py-2">{{ $evento->ubicacion }}</td>
-                    <td class="px-4 py-2">{{ $evento->fecha }}</td>
+                    <td class="px-4 py-2">{{ $evento->fecha->format('d/m/Y H:i') }}</td>
                     <td class="px-4 py-2 flex space-x-2">
                         <a href="{{ route('eventos.index', ['edit' => $evento->id]) }}" class="btn btn-sm bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded transition">Editar</a>
                         <form action="{{ route('eventos.destroy', $evento) }}" method="POST" style="display:inline;">

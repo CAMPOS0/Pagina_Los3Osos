@@ -26,16 +26,22 @@ class ClienteEventoController extends Controller
         $request->validate([
             'servicio_id' => 'required|exists:servicios,id',
             'ubicacion' => 'required|max:255',
-            'fecha' => 'required|date|after:today',
+            'fecha' => 'required|date_format:Y-m-d\TH:i|after:today',
             'personas' => 'required|integer|min:1'
         ]);
 
         $servicio = Servicio::findOrFail($request->servicio_id);
         $precioFinal = $servicio->precio * $request->personas;
+        
+        // Asegurar que tenemos el ID del usuario autenticado
+        $userId = auth()->id();
+        if (!$userId) {
+            abort(403, 'Usuario no autenticado');
+        }
 
         $evento = Evento::create([
             'servicio_id' => $servicio->id,
-            'user_id' => auth()->id(),
+            'user_id' => $userId,
             'precio_final' => $precioFinal,
             'ubicacion' => $request->ubicacion,
             'fecha' => $request->fecha

@@ -9,12 +9,16 @@ class Evento extends Model
 {
     use HasFactory;
 
-       protected $fillable = [
+    protected $fillable = [
         'servicio_id',
         'user_id', // si quieres registrar quién creó el evento (opcional)
         'precio_final',
         'ubicacion',
         'fecha',
+    ];
+
+    protected $casts = [
+        'fecha' => 'datetime',
     ];
 
     // Relación con Servicio

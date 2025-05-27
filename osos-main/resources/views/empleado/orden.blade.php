@@ -40,17 +40,18 @@
                         <td class="px-6 py-4 whitespace-nowrap">{{ $orden->cantidad }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="text-orange-600 font-semibold">${{ number_format($orden->total, 2) }}</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        </td>                        <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                 {{ $orden->estado === 'pendiente' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                 {{ $orden->estado === 'en_proceso' ? 'bg-blue-100 text-blue-800' : '' }}
                                 {{ $orden->estado === 'completada' ? 'bg-green-100 text-green-800' : '' }}">
                                 {{ ucfirst($orden->estado) }}
                             </span>
-                        </td><td class="px-6 py-4 text-sm text-gray-500">
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">
                             {{ $orden->notes }}
-                        </td>                        </td><td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                             <a href="{{ route('empleado.orden.edit', $orden) }}" 
                                class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded transition">
                                 Editar
@@ -59,7 +60,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 
-                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+                                        class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition"
                                         onclick="return confirm('¿Estás seguro de eliminar esta orden?')">
                                     Eliminar
                                 </button>

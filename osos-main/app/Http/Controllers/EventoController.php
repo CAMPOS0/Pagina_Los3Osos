@@ -27,7 +27,7 @@ class EventoController extends Controller
             'servicio_id' => 'required|exists:servicios,id',
             'precio_final' => 'required|numeric',
             'ubicacion' => 'required|max:255',
-            'fecha' => 'required|date'
+            'fecha' => 'required|date_format:Y-m-d\TH:i'
         ]);
 
         Evento::create([
@@ -47,7 +47,7 @@ class EventoController extends Controller
             'servicio_id' => 'required|exists:servicios,id',
             'precio_final' => 'required|numeric',
             'ubicacion' => 'required|max:255',
-            'fecha' => 'required|date'
+            'fecha' => 'required|date_format:Y-m-d\TH:i'
         ]);
 
         $evento->update($request->all());

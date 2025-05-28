@@ -1,6 +1,9 @@
 FROM node:20-slim as node
 FROM php:8.2-fpm
 
+# Install nginx
+RUN apt-get update && apt-get install -y nginx
+
 # Copiar node y npm desde la imagen de node
 COPY --from=node /usr/local/bin/node /usr/local/bin/
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
@@ -82,6 +85,9 @@ RUN php artisan view:cache
 
 # Exponer puerto
 EXPOSE 8000
+
+# Copiar y configurar Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Script de inicio
 COPY docker-entrypoint.sh /usr/local/bin/

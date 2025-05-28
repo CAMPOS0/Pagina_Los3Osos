@@ -8,4 +8,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        outDir: 'public/build',
+        chunkSizeWarningLimit: 1024,
+        manifest: true,
+        rollupOptions: {
+            output: {
+                manualChunks: undefined
+            }
+        }
+    }
 });

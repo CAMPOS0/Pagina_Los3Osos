@@ -47,8 +47,17 @@ RUN npm run build
 RUN chmod -R 775 storage bootstrap/cache
 RUN chown -R www-data:www-data /var/www
 
+# Copiar archivo de configuración de producción
+COPY .env.production .env
+
+# Generar clave de aplicación y optimizar
+RUN php artisan key:generate
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
+
 # Exponer puerto
 EXPOSE 8000
 
 # Comando para iniciar la aplicación
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD php artisan migrate --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=$PORT

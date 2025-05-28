@@ -82,5 +82,9 @@ RUN php artisan view:cache
 # Exponer puerto
 EXPOSE 8000
 
+# Script de inicio
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Comando para iniciar la aplicación
-CMD php artisan migrate --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=$PORT
+ENTRYPOINT ["docker-entrypoint.sh"]

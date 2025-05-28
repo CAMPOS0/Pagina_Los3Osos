@@ -57,7 +57,7 @@ RUN chown -R www-data:www-data /var/www
 RUN echo "APP_NAME=\"Los 3 Osos\"" > .env && \
     echo "APP_ENV=production" >> .env && \
     echo "APP_DEBUG=false" >> .env && \
-    echo "APP_URL=https://pagina-los3osos-production.up.railway.app" >> .env && \
+    echo "APP_URL=\${RAILWAY_PUBLIC_DOMAIN}" >> .env && \
     echo "DB_CONNECTION=mysql" >> .env && \
     echo "DB_HOST=\${MYSQLHOST}" >> .env && \
     echo "DB_PORT=\${MYSQLPORT}" >> .env && \

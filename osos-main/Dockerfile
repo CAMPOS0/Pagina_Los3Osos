@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    default-mysql-client
+    default-mysql-client \
+    default-libmysqlclient-dev
 
 # Limpiar cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

@@ -25,27 +25,28 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Configurar directorio de trabajo
 WORKDIR /var/www
 
-# Instalar dependencias de Node.js primero
+# Copiar archivos de configuración primero
 COPY package*.json vite.config.js tailwind.config.js postcss.config.js /var/www/
-RUN npm install
-
-# Copiar archivos de composer para optimizar el cache
 COPY composer.* /var/www/
+
+# Instalar composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts --no-autoloader
+
+# Instalar dependencias de Node.js y PHP
+RUN npm install && \
+    composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts --no-autoloader
 
 # Copiar el resto de los archivos del proyecto
 COPY . /var/www/
 
-# Finalizar la instalación de composer
-RUN composer dump-autoload --optimize
+# Crear directorios necesarios y configurar permisos
+RUN mkdir -p /var/www/public/build && \
+    chmod -R 777 /var/www/public/build && \
+    chmod -R 777 resources
 
-# Configurar los permisos para los archivos de node
-RUN mkdir -p /var/www/public/build
-RUN chmod -R 777 /var/www/public/build
-
-# Construir los assets con npm
-RUN npm run build
+# Finalizar la instalación de composer y construir assets
+RUN composer dump-autoload --optimize && \
+    npm run build
 
 # Configurar permisos
 RUN chmod -R 775 storage bootstrap/cache

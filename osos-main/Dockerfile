@@ -47,8 +47,26 @@ RUN npm run build
 RUN chmod -R 775 storage bootstrap/cache
 RUN chown -R www-data:www-data /var/www
 
-# Copiar archivo de configuración de producción
-COPY .env.production .env
+# Configurar variables de entorno
+RUN echo "APP_NAME=\"Los 3 Osos\"" > .env && \
+    echo "APP_ENV=production" >> .env && \
+    echo "APP_DEBUG=false" >> .env && \
+    echo "APP_URL=https://pagina-los3osos-production.up.railway.app" >> .env && \
+    echo "DB_CONNECTION=mysql" >> .env && \
+    echo "DB_HOST=\${MYSQLHOST}" >> .env && \
+    echo "DB_PORT=\${MYSQLPORT}" >> .env && \
+    echo "DB_DATABASE=\${MYSQL_DATABASE}" >> .env && \
+    echo "DB_USERNAME=\${MYSQLUSER}" >> .env && \
+    echo "DB_PASSWORD=\${MYSQLPASSWORD}" >> .env && \
+    echo "FILESYSTEM_DISK=public" >> .env && \
+    echo "SESSION_DRIVER=cookie" >> .env && \
+    echo "CACHE_DRIVER=file" >> .env && \
+    echo "QUEUE_CONNECTION=sync" >> .env && \
+    echo "LOG_CHANNEL=stderr" >> .env && \
+    echo "LOG_LEVEL=error" >> .env && \
+    echo "BROADCAST_DRIVER=log" >> .env && \
+    echo "SESSION_LIFETIME=120" >> .env && \
+    echo "SESSION_SECURE_COOKIE=true" >> .env
 
 # Generar clave de aplicación y optimizar
 RUN php artisan key:generate

@@ -16,7 +16,13 @@
         "laravel/tinker": "^2.10.1",
         "mailgun/mailgun-php": "^4.3",
         "symfony/http-client": "^7.2",
-        "symfony/mailgun-mailer": "^7.2"
+        "symfony/mailgun-mailer": "^7.2",
+        "ext-mbstring": "*",
+    "ext-pdo": "*",
+    "ext-curl": "*",
+    "ext-json": "*",
+
+        
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
